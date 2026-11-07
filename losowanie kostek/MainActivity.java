@@ -1,7 +1,8 @@
-package com.example.losowaniekostek;
+package com.oliwia.losowaniekostek;
 
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void odswiezWidok() {
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < wyniki.size(); i++) {
             if (i > 0) {
@@ -117,10 +119,27 @@ public class MainActivity extends AppCompatActivity {
             sb.append(wyniki.get(i));
         }
         textViewWyniki.setText(sb.toString());
+
+
         gridKostki.removeAllViews();
+        gridKostki.setColumnCount(5);
 
-        int kolumny = 5;
-        gridKostki.setColumnCount(kolumny);
+        for (int i = 0; i < wyniki.size(); i++) {
+            TextView kostkaView = new TextView(this);
+                kostkaView.setText(String.valueOf(wyniki.get(i)));
+                kostkaView.setTextSize(24);
+            kostkaView.setGravity(Gravity.center);
+            kostkaView.setTextColor(getResources().getColor(android.R.color.black));
+            kostkaView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
 
+
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = 150;
+            params.height = 150;
+            params.setMargins(10, 10, 10, 10);
+            kostkaView.setLayoutParams(params);
+
+            gridKostki.addView(kostkaView);
+        }
     }
 }
